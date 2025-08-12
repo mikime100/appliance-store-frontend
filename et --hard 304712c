@@ -1,0 +1,38 @@
+[33mec84982[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Force Vercel deployment to trigger latest changes
+[33mb693217[m Major product card redesign: improved spacing, larger text, green pricing, better layout for mobile and desktop
+[33m9990ed9[m Fix overlapping content by replacing TruncatedText with fixed height containers and proper overflow handling
+[33mdf26119[m Fix product card layout to prevent overlapping content on mobile and desktop
+[33me91524b[m Fix product card pricing color to green for better visibility
+[33m08c77ae[m Fix product card pricing color to green for better visibility
+[33m2855290[m Improve mobile hero section with responsive text and better layout
+[33mbcee8c4[m Improve mobile product cards and navigation bar design
+[33m13ed58e[m Make frontend fully responsive for mobile devices
+[33md3ab8f2[m Make /admin always show login page, dashboard at /admin/dashboard
+[33m603a061[m Create separate routes for admin login and dashboard
+[33m21b1c23[m Fix login redirect and implement functional profile dropdown logout
+[33m82fa24b[m Fix admin dashboard routing and API endpoints for production deployment
+[33m768a4df[m Add functional password visibility toggle to admin login form
+[33m6868671[m Update admin login page design to match modern dark theme with YQL branding
+[33m83996b8[m Add secure admin authentication system with login page
+[33m2cd053d[m Update API URLs to use production backend on Render
+[33m6d9180e[m Add Vercel configuration and update gitignore
+[33m304712c[m Initial commit - React appliance store app
+[33mec84982[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Force Vercel deployment to trigger latest changes
+[33mb693217[m Major product card redesign: improved spacing, larger text, green pricing, better layout for mobile and desktop
+[33m9990ed9[m Fix overlapping content by replacing TruncatedText with fixed height containers and proper overflow handling
+[33mdf26119[m Fix product card layout to prevent overlapping content on mobile and desktop
+[33me91524b[m Fix product card pricing color to green for better visibility
+[33m08c77ae[m Fix product card pricing color to green for better visibility
+[33m2855290[m Improve mobile hero section with responsive text and better layout
+[33mbcee8c4[m Improve mobile product cards and navigation bar design
+[33m13ed58e[m Make frontend fully responsive for mobile devices
+[33md3ab8f2[m Make /admin always show login page, dashboard at /admin/dashboard
+[33m603a061[m Create separate routes for admin login and dashboard
+[33m21b1c23[m Fix login redirect and implement functional profile dropdown logout
+[33m82fa24b[m Fix admin dashboard routing and API endpoints for production deployment
+[33m768a4df[m Add functional password visibility toggle to admin login form
+[33m6868671[m Update admin login page design to match modern dark theme with YQL branding
+[33m83996b8[m Add secure admin authentication system with login page
+[33m2cd053d[m Update API URLs to use production backend on Render
+[33m6d9180e[m Add Vercel configuration and update gitignore
+[33m304712c[m Initial commit - React appliance store app
