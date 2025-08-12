@@ -178,7 +178,14 @@ function AdminAddProduct({ onProductAdded }) {
       setImage(null);
       setImagePreview(null);
       setErrors({});
-      // Do not trigger parent refresh; toast is enough
+      // Trigger parent dashboard refresh so Recent Products updates immediately
+      if (typeof onProductAdded === "function") {
+        try {
+          onProductAdded();
+        } catch (e) {
+          // no-op if parent not provided
+        }
+      }
     } catch (error) {
       console.error("Upload error:", error);
       console.error("Error response:", error.response?.data);
