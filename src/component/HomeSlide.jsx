@@ -13,7 +13,7 @@ function HomeSlide() {
           backgroundSize: "cover",
           backgroundPosition: "center top",
           backgroundRepeat: "no-repeat",
-          height: "calc(120vh + 115px)",
+          height: "calc(150vh + 115px)",
         }}
       >
         {/* Mobile Headline - Top Right Corner - Independent Container */}
