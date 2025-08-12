@@ -332,7 +332,7 @@ function AdminAddProduct({ onProductAdded }) {
                 </button>
               </div>
               <p className="text-sm text-gray-600 mt-2">
-                A: Excellent, B: Good, C: Fair
+                A: Brand New, B: Used Good, C: Used Fair
               </p>
             </div>
           </div>
