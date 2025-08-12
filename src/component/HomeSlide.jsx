@@ -34,8 +34,8 @@ function HomeSlide() {
           </p>
         </div>
 
-        {/* Additional spacer to increase gap (reduced by 50px) */}
-        <div className="h-[49px]"></div>
+        {/* Additional spacer to increase gap */}
+        <div className="h-[99px]"></div>
 
         {/* Mobile Description - Independent Container */}
         <div className="relative z-10 text-white">
