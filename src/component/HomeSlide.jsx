@@ -7,13 +7,13 @@ function HomeSlide() {
     <div className="w-full pt-4 sm:pt-8 md:pt-12 lg:pt-16 relative">
       {/* Mobile Design - Using background image like desktop */}
       <div
-        className="md:hidden grid grid-cols-1 justify-center px-6 pt-8 pb-0 relative"
+        className="md:hidden grid grid-cols-1 justify-center px-6 pt-8 pb-0 relative overflow-visible mb-[-50px]"
         style={{
           backgroundImage: `url(${smallHeroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
           backgroundRepeat: "no-repeat",
-          minHeight: "calc(100vh - 50px)",
+          minHeight: "100vh",
         }}
       >
         {/* Mobile Headline - Top Right Corner - Independent Container */}
