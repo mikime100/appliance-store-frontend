@@ -135,6 +135,8 @@ function AdminDashboard() {
 
   useEffect(() => {
     fetchStats();
+    const id = setInterval(fetchStats, 60 * 1000); // periodic safety refresh
+    return () => clearInterval(id);
   }, []);
 
   const renderPage = () => {

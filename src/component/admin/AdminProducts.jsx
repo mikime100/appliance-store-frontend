@@ -37,15 +37,6 @@ function AdminProducts({ onProductUpdate }) {
       const response = await axios.get(API_ENDPOINTS.PRODUCTS);
       setProducts(response.data);
       setLoading(false);
-
-      // Notify parent (dashboard) that products list changed so it can refetch stats
-      if (typeof onProductUpdate === "function") {
-        try {
-          onProductUpdate();
-        } catch (e) {
-          // ignore
-        }
-      }
     } catch (error) {
       console.error("Error fetching products:", error);
       setLoading(false);
@@ -61,7 +52,9 @@ function AdminProducts({ onProductUpdate }) {
       setToast({ open: true, type: "error", text: "Product deleted" });
 
       if (typeof onProductUpdate === "function") {
-        try { onProductUpdate(); } catch (e) {}
+        try {
+          onProductUpdate();
+        } catch (e) {}
       }
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -84,7 +77,9 @@ function AdminProducts({ onProductUpdate }) {
       setToast({ open: true, type: "success", text: "Product updated" });
 
       if (typeof onProductUpdate === "function") {
-        try { onProductUpdate(); } catch (e) {}
+        try {
+          onProductUpdate();
+        } catch (e) {}
       }
     } catch (error) {
       console.error("Error updating product:", error);
