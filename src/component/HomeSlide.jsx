@@ -7,13 +7,13 @@ function HomeSlide() {
     <div className="w-full pt-4 sm:pt-8 md:pt-12 lg:pt-16 relative">
       {/* Mobile Design - Using background image like desktop */}
       <div
-        className="md:hidden grid grid-cols-1 justify-center px-6 py-8 relative"
+        className="md:hidden grid grid-cols-1 justify-center px-6 pt-8 pb-0 relative"
         style={{
           backgroundImage: `url(${smallHeroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
           backgroundRepeat: "no-repeat",
-          height: "calc(150vh + 115px)",
+          minHeight: "100vh",
         }}
       >
         {/* Mobile Headline - Top Right Corner - Independent Container */}
@@ -52,7 +52,7 @@ function HomeSlide() {
         <div className="h-[5px]"></div>
 
         {/* Single Larger Appliance Image - Independent Container */}
-        <div className="relative z-10 flex justify-center items-center mt-0 pb-4">
+        <div className="relative z-10 flex justify-center items-center mt-0 pb-0">
           <img
             src={heroImage}
             alt="Modern appliances"
