@@ -32,6 +32,7 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   // Read status management
@@ -195,12 +196,21 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen flex" style={{ background: PRIMARY_COLOR }}>
+    <div className="min-h-screen md:flex" style={{ background: PRIMARY_COLOR }}>
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 md:hidden z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
       {/* Modern Sidebar */}
       <aside
         className={`${
-          sidebarCollapsed ? "w-20" : "w-64"
-        } transition-all duration-300 ease-in-out bg-white/80 backdrop-blur-xl border-r border-slate-300 shadow-lg`}
+          sidebarCollapsed ? "md:w-20" : "md:w-64"
+        } w-64 fixed md:static inset-y-0 left-0 transform transition-transform duration-300 ease-in-out bg-white/80 backdrop-blur-xl border-r border-slate-300 shadow-lg z-50 md:translate-x-0 ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
         style={{ borderRightColor: "rgba(15, 23, 42, 0.3)" }}
       >
         <div className="p-4">
@@ -222,7 +232,13 @@ function AdminDashboard() {
           <nav className="space-y-2">
             {/* Burger Menu Button */}
             <button
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              onClick={() => {
+                if (window.innerWidth < 768) {
+                  setIsMobileMenuOpen(false);
+                } else {
+                  setSidebarCollapsed(!sidebarCollapsed);
+                }
+              }}
               className="w-full flex items-center px-4 py-3 rounded-lg font-medium transition-all duration-200 text-slate-700 hover:bg-slate-100 hover:text-slate-800 hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/40"
             >
               <span className="material-icons text-xl mr-3 w-6 text-center">
@@ -237,7 +253,10 @@ function AdminDashboard() {
               icon="dashboard"
               label="Dashboard"
               active={activePage === "dashboard"}
-              onClick={() => setActivePage("dashboard")}
+              onClick={() => {
+                setActivePage("dashboard");
+                setIsMobileMenuOpen(false);
+              }}
               collapsed={sidebarCollapsed}
             />
 
@@ -248,6 +267,7 @@ function AdminDashboard() {
               onClick={() => {
                 setActivePage("products");
                 markProductsAsRead();
+                setIsMobileMenuOpen(false);
               }}
               collapsed={sidebarCollapsed}
             />
@@ -256,7 +276,10 @@ function AdminDashboard() {
               icon="add_circle"
               label="Add Product"
               active={activePage === "add-product"}
-              onClick={() => setActivePage("add-product")}
+              onClick={() => {
+                setActivePage("add-product");
+                setIsMobileMenuOpen(false);
+              }}
               collapsed={sidebarCollapsed}
             />
 
@@ -267,6 +290,7 @@ function AdminDashboard() {
               onClick={() => {
                 setActivePage("comments");
                 markCommentsAsRead();
+                setIsMobileMenuOpen(false);
               }}
               collapsed={sidebarCollapsed}
               badge={unreadComments > 0 ? unreadComments : null}
@@ -279,6 +303,7 @@ function AdminDashboard() {
               onClick={() => {
                 setActivePage("notifications");
                 markNotificationsAsRead();
+                setIsMobileMenuOpen(false);
               }}
               collapsed={sidebarCollapsed}
               badge={unreadNotifications > 0 ? unreadNotifications : null}
@@ -288,7 +313,10 @@ function AdminDashboard() {
               icon="settings"
               label="Settings"
               active={activePage === "settings"}
-              onClick={() => setActivePage("settings")}
+              onClick={() => {
+                setActivePage("settings");
+                setIsMobileMenuOpen(false);
+              }}
               collapsed={sidebarCollapsed}
             />
           </nav>
@@ -299,11 +327,18 @@ function AdminDashboard() {
       <div className="flex-1 flex flex-col">
         {/* Modern Header */}
         <header
-          className="bg-white/80 backdrop-blur-xl border-b border-slate-300 px-8 py-4 shadow-sm relative z-50"
+          className="bg-white/80 backdrop-blur-xl border-b border-slate-300 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 shadow-sm relative z-30"
           style={{ borderBottomColor: "rgba(15, 23, 42, 0.3)" }}
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              {/* Mobile menu button */}
+              <button
+                className="md:hidden p-2 rounded-lg border border-slate-200 hover:bg-slate-100"
+                onClick={() => setIsMobileMenuOpen(true)}
+              >
+                <span className="material-icons">menu</span>
+              </button>
               <h1 className="text-slate-800 text-2xl font-semibold">
                 {activePage === "dashboard" && "Dashboard"}
                 {activePage === "products" && "Products"}
@@ -411,7 +446,7 @@ function AdminDashboard() {
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 p-8 overflow-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
           <div className="max-w-7xl mx-auto">{renderPage()}</div>
         </main>
       </div>

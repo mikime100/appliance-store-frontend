@@ -118,15 +118,15 @@ function AdminProducts({ onProductUpdate }) {
           {toast.text}
         </div>
       )}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <h2 className="text-xl font-semibold">Products Management</h2>
-        <div className="flex space-x-4">
+        <div className="flex gap-3">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full sm:w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={fetchProducts}
@@ -137,22 +137,15 @@ function AdminProducts({ onProductUpdate }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Desktop table */}
+      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Product
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Price
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Created
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -160,56 +153,52 @@ function AdminProducts({ onProductUpdate }) {
               <tr key={product._id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex-shrink-0 h-12 w-12">
-                      <img
-                        className="h-12 w-12 rounded-md object-cover"
-                        src={product.imageUrl}
-                        alt={product.modelName}
-                      />
-                    </div>
+                    <img className="h-12 w-12 rounded-md object-cover" src={product.imageUrl} alt={product.modelName} />
                     <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {product.modelName}
-                      </div>
+                      <div className="text-sm font-medium text-gray-900">{product.modelName}</div>
                       <div className="text-sm text-gray-500">
-                        <TruncatedText
-                          text={product.description}
-                          productId={product._id}
-                          maxLines={2}
-                        />
+                        <TruncatedText text={product.description} productId={product._id} maxLines={2} />
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  ${product.price}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(product.createdAt).toLocaleDateString()}
-                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${product.price}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(product.createdAt).toLocaleDateString()}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex space-x-2">
-                    <button
-                      onClick={() => setEditingProduct(product)}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        setProductToDelete(product);
-                        setShowDeleteModal(true);
-                      }}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Delete
-                    </button>
+                    <button onClick={() => setEditingProduct(product)} className="text-blue-600 hover:text-blue-900">Edit</button>
+                    <button onClick={() => { setProductToDelete(product); setShowDeleteModal(true); }} className="text-red-600 hover:text-red-900">Delete</button>
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile cards */}
+      <div className="md:hidden grid grid-cols-1 gap-4">
+        {filteredProducts.map((product) => (
+          <div key={product._id} className="bg-white rounded-lg shadow p-4">
+            <div className="flex gap-3">
+              <img src={product.imageUrl} alt={product.modelName} className="w-20 h-20 rounded-md object-cover flex-shrink-0" />
+              <div className="min-w-0">
+                <p className="font-semibold truncate">{product.modelName}</p>
+                <p className="text-sm text-gray-500 line-clamp-2">
+                  <TruncatedText text={product.description} productId={product._id} maxLines={2} />
+                </p>
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-sm font-medium">${product.price}</span>
+                  <span className="text-xs text-gray-500">{new Date(product.createdAt).toLocaleDateString()}</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-3 flex gap-3">
+              <button onClick={() => setEditingProduct(product)} className="flex-1 py-2 text-sm font-medium text-white bg-blue-600 rounded-md">Edit</button>
+              <button onClick={() => { setProductToDelete(product); setShowDeleteModal(true); }} className="flex-1 py-2 text-sm font-medium text-white bg-red-600 rounded-md">Delete</button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Edit Modal */}
